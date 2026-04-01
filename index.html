@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="manifest" href="/manifest.json">
+  <title>Mis Sorteos</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; text-align: center; padding: 20px; }
+    .card { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); max-width: 400px; margin: 20px auto; }
+    .btn-group { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+    button { padding: 10px 20px; border: none; border-radius: 20px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+    .btn-bono { background: #00a651; color: white; }
+    .btn-primi { background: #0054a6; color: white; }
+    .ball { display: inline-block; width: 35px; height: 35px; line-height: 35px; background: #ffcc00; border-radius: 50%; margin: 3px; font-weight: bold; color: #333; box-shadow: inset -3px -3px 5px rgba(0,0,0,0.2); }
+    .ball.comp { background: #ff5722; color: white; }
+    .ball.rein { background: #2196f3; color: white; }
+    .bote { color: #d32f2f; font-size: 1.2em; font-weight: bold; margin-top: 15px; }
+  </style>
+</head>
+<body>
+  <h2>Resultados Lotería</h2>
+  <div class="btn-group">
+    <button class="btn-bono" onclick="cargar('Bonoloto')">Bonoloto</button>
+    <button class="btn-primi" onclick="cargar('Primitiva')">Primitiva</button>
+  </div>
+  <div id="contenido" class="card">
+    <p>Selecciona un sorteo para ver los resultados</p>
+  </div>
+
+  <script>
+    // 👇 Pon aquí tu URL de Apps Script
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwZ-RwZbd86--fHKM1Gcm5v8qfSGYxJNeVNbxOhOw6N2pCox-3k50Hij-pBb9l6bybm/exec';
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js');
+    }
+
+    function cargar(tipo) {
+      document.getElementById('contenido').innerHTML = 'Cargando...';
+      fetch(`${APPS_SCRIPT_URL}?tipo=${tipo}`)
+        .then(r => r.json())
+        .then(data => {
+          let html = `<h3>${tipo} - ${data.dia}</h3>`;
+          html += `<p><small>${data.fecha}</small></p>`;
+          html += `<div>${data.numeros.map(n => `<span class="ball">${n}</span>`).join('')}</div>`;
+          html += `<p>C: <span class="ball comp">${data.complementario}</span> R: <span class="ball rein">${data.reintegro}</span></p>`;
+          html += `<div class="bote">Bote: ${data.bote}</div>`;
+          document.getElementById('contenido').innerHTML = html;
+        })
+        .catch(() => {
+          document.getElementById('contenido').innerHTML = 'Error al cargar datos. Comprueba tu conexión.';
+        });
+    }
+  </script>
+</body>
+</html>
