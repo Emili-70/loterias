@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="manifest" href="/manifest.json">
+  <link rel="manifest" href="manifest.json">
   <title>Mis Sorteos</title>
   <style>
     body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; text-align: center; padding: 20px; }
@@ -33,7 +33,7 @@
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwZ-RwZbd86--fHKM1Gcm5v8qfSGYxJNeVNbxOhOw6N2pCox-3k50Hij-pBb9l6bybm/exec';
 
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js');
+      navigator.serviceWorker.register('sw.js');
     }
 
     function cargar(tipo) {
