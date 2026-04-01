@@ -45,7 +45,7 @@
           html += `<p><small>${data.fecha}</small></p>`;
           html += `<div>${data.numeros.map(n => `<span class="ball">${n}</span>`).join('')}</div>`;
           html += `<p>C: <span class="ball comp">${data.complementario}</span> R: <span class="ball rein">${data.reintegro}</span></p>`;
-          html += `<div class="bote">Bote: ${data.bote}</div>`;
+          html += `<div class="bote">${data.bote ? 'Bote: ' + data.bote : 'Sin bote acumulado'}</div>`;
           document.getElementById('contenido').innerHTML = html;
         })
         .catch(() => {
