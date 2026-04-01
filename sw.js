@@ -1,5 +1,5 @@
 const CACHE = 'sorteos-v1';
-const URLS = ['/', '/index.html', '/manifest.json'];
+const URLS = ['/loterias/', '/loterias/index.html', '/loterias/manifest.json'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(URLS)));
