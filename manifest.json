@@ -1,6 +1,6 @@
 {
-  "name": "Mis Sorteos",
-  "short_name": "Sorteos",
+  "name": "Loterías",
+  "short_name": "Primitiva-Bonoloto",
   "start_url": "/loterias/",
   "display": "standalone",
   "background_color": "#f0f2f5",
